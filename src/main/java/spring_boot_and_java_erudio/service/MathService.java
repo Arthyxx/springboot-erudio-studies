@@ -1,7 +1,9 @@
 package spring_boot_and_java_erudio.service;
 
+import org.springframework.stereotype.Service;
 import spring_boot_and_java_erudio.exceptions.UnsupportedMathOperationException;
 
+@Service
 public class MathService {
 
     public Double somar(String num1, String num2) {
