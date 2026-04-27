@@ -1,4 +1,4 @@
-package spring_boot_and_java_erudio.service;
+package spring_boot_and_java_erudio.services;
 
 import org.springframework.stereotype.Service;
 import spring_boot_and_java_erudio.exceptions.UnsupportedMathOperationException;

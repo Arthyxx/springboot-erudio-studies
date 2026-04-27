@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spring_boot_and_java_erudio.service.MathService;
+import spring_boot_and_java_erudio.services.MathService;
 
 @RestController
 @RequestMapping("/math")
