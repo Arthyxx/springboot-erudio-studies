@@ -1,130 +1,159 @@
-# 📚 Spring Boot Studies - Erudio (Udemy)
+# 🚀 Spring Boot API - Study
 
-Este repositório contém meus estudos práticos de **Spring Boot com Java**, desenvolvidos a partir do curso do professor Erudio na Udemy.
+## 📌 Sobre o Projeto
 
-O objetivo deste projeto é consolidar meus conhecimentos em desenvolvimento backend, criando APIs RESTful seguindo boas práticas de mercado, arquitetura em camadas e código limpo.
+Este projeto é uma API REST desenvolvida com **Spring Boot** como parte de estudos práticos em Java.
 
----
-
-## 🎯 Objetivo
-
-Este projeto foi criado com o foco em:
-
-- Aprender Spring Boot na prática
-- Evoluir minhas habilidades em Java
-- Entender como construir APIs REST profissionais
-- Aplicar conceitos de arquitetura e boas práticas
-- Me preparar para o mercado como desenvolvedor backend
+A aplicação implementa operações CRUD completas para gerenciamento de pessoas, além de endpoints adicionais para operações matemáticas e testes de logging.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## 🧠 Tecnologias Utilizadas
 
-- Java 21
-- Spring Boot 3.4
-- Maven
-- Spring Web
-- Spring Data JPA
-- Bean Validation
-- REST API
+* Java 21
+* Spring Boot 3
+* Spring Web (REST)
+* Spring Data JPA
+* MySQL
+* Flyway (migração de banco)
+* Dozer Mapper (conversão DTO ↔ Entity)
+* Maven
 
 ---
 
-## 🏗️ Estrutura do Projeto
+## 🏗️ Arquitetura
 
 O projeto segue uma arquitetura em camadas:
 
-controller → recebe requisições HTTP  
-service → regras de negócio  
-repository → acesso a dados  
-model → entidades do sistema  
-exceptions → tratamento global de erros
+```
+controller → service → repository → model
+                ↓
+              DTO
+```
+
+### 📂 Estrutura
+
+* `controllers` → Endpoints REST
+* `services` → Regras de negócio
+* `repository` → Acesso ao banco
+* `model` → Entidades JPA
+* `data.dto` → Objetos de transferência (v1 e v2)
+* `exceptions` → Tratamento global de erros
+* `mapper` → Conversão entre DTO e entidade
+* `resources/db/migration` → Scripts do Flyway
 
 ---
 
-## 📌 Funcionalidades Implementadas
+## 🔗 Endpoints Principais
 
-- Operações matemáticas via API REST:
-    - Soma
-    - Subtração
-    - Multiplicação
-    - Divisão
-    - Média
-    - Raiz quadrada
+### 👤 Pessoa (v1)
 
-- Validação de entradas
-- Tratamento global de exceções
-- Retorno padronizado de erros
+| Método | Endpoint              | Descrição              |
+| ------ | --------------------- | ---------------------- |
+| GET    | `/api/person/v1`      | Lista todas as pessoas |
+| GET    | `/api/person/v1/{id}` | Busca por ID           |
+| POST   | `/api/person/v1`      | Cria pessoa            |
+| PUT    | `/api/person/v1`      | Atualiza pessoa        |
+| DELETE | `/api/person/v1/{id}` | Deleta pessoa          |
+
+### 👤 Pessoa (v2)
+
+| Método | Endpoint         | Descrição                                            |
+| ------ | ---------------- | ---------------------------------------------------- |
+| POST   | `/api/person/v2` | Cria pessoa com versão 2 (inclui data de nascimento) |
+
+### 🧮 Matemática
+
+| Endpoint                    | Descrição     |
+| --------------------------- | ------------- |
+| `/math/sum/{num1}/{num2}`   | Soma          |
+| `/math/sub/{num1}/{num2}`   | Subtração     |
+| `/math/multi/{num1}/{num2}` | Multiplicação |
+| `/math/div/{num1}/{num2}`   | Divisão       |
+| `/math/med/{n1}/{n2}/{n3}`  | Média         |
+| `/math/raiz/{num}`          | Raiz quadrada |
+
+### 🧪 Teste de Logs
+
+* `GET /api/test/v1`
 
 ---
 
 ## ⚠️ Tratamento de Exceções
 
-A API utiliza um handler global para garantir respostas padronizadas:
+A aplicação possui tratamento global usando `@ControllerAdvice`, retornando:
+
+* `400 Bad Request`
+* `404 Not Found`
+* `500 Internal Server Error`
+
+Formato padrão:
 
 ```json
 {
-  "timestamp": "...",
-  "message": "Descrição do erro",
-  "details": "uri=/endpoint"
+  "timestamp": "2026-01-01",
+  "message": "Erro",
+  "details": "Descrição"
 }
 ```
 
 ---
 
-## 📈 O que estou aprendendo
+## 🗄️ Banco de Dados
 
-- Criação de APIs RESTful
-- Manipulação de HTTP (GET, POST, PUT, DELETE)
-- Validação de dados
-- Tratamento de exceções
-- Clean Code
-- Arquitetura em camadas
+O projeto utiliza **MySQL** com versionamento via Flyway.
+
+### Scripts:
+
+* `V1__Create_Table_Person.sql`
+* `V2__Populate_Table_Person.sql`
+
 
 ---
 
-## ▶️ Como executar
+## ▶️ Como Executar
+
+### 1. Clonar o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
-cd spring-boot-and-java-erudio
-./mvnw spring-boot:run
+git clone https://github.com/seu-usuario/seu-repositorio.git
 ```
 
-Acesse: http://localhost:8080
+### 2. Configurar variáveis de ambiente
+
+### 3. Rodar aplicação
+
+```bash
+mvn spring-boot:run
+```
 
 ---
 
-## 🔗 Exemplos de uso
+## 📈 Melhorias Futuras
 
-GET /math/sum/10/5  
-GET /math/div/10/2
-
----
-
-## 📌 Próximos Passos (edite conforme evolui)
-
-- [ ] Integração com banco de dados
-- [ ] CRUD completo
-- [ ] DTOs
-- [ ] Spring Security + JWT
-- [ ] Swagger (OpenAPI)
-- [ ] Testes automatizados
-
----
-
-## 🧩 Como adaptar este README
-
-Você pode atualizar facilmente:
-
-- Tecnologias utilizadas
-- Funcionalidades
-- Endpoints
-- Próximos passos
-- Descrição do projeto
+* Validação com Bean Validation
+* Autenticação (Spring Security + JWT)
+* Documentação com Swagger/OpenAPI
+* Testes unitários e integração
+* Dockerização
 
 ---
 
 ## 👨‍💻 Autor
 
-Arthur Gonçalves
+[Arthur Gonçalves](https://www.linkedin.com/in/arthur-gon%C3%A7alves-3957a4233/)
+
+---
+
+## ⭐ Objetivo
+
+Projeto criado com foco em aprendizado prático de:
+
+* APIs REST
+* Arquitetura em camadas
+* Integração com banco de dados
+* Boas práticas no Spring Boot
+
+---
+
+Se esse projeto te ajudou, considere dar uma ⭐ no repositório!
