@@ -9,7 +9,7 @@ import spring_boot_and_java_erudio.services.PersonServices;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person")
 public class PersonController {
 
     private final PersonServices service;
@@ -18,27 +18,27 @@ public class PersonController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/v1/{id}")
     public PersonDTO findById(@PathVariable("id") Long id){
         return service.findById(id);
     }
 
-    @GetMapping
+    @GetMapping("/v1")
     public List<PersonDTO> findAll(){
         return service.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/v1")
     public PersonDTO create(@RequestBody PersonDTO person){
         return service.create(person);
     }
 
-    @PutMapping
+    @PutMapping("/v1")
     public PersonDTO update(@RequestBody PersonDTO person){
         return service.update(person);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/v1/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
 
