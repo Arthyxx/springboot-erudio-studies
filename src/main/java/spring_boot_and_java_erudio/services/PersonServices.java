@@ -1,5 +1,7 @@
 package spring_boot_and_java_erudio.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring_boot_and_java_erudio.exceptions.ResourceNotFoundException;
@@ -8,12 +10,12 @@ import spring_boot_and_java_erudio.repository.PersonRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
+
 
 @Service
 public class PersonServices {
 
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
+    private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
     @Autowired
     private PersonRepository repository;
