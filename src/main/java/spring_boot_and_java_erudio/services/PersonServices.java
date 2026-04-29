@@ -2,11 +2,10 @@ package spring_boot_and_java_erudio.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring_boot_and_java_erudio.controllers.PersonController;
 import spring_boot_and_java_erudio.data.dto.v1.PersonDTO;
-import spring_boot_and_java_erudio.data.dto.v2.PersonDTOV2;
+import spring_boot_and_java_erudio.exceptions.RequiredObjectIsNullException;
 import spring_boot_and_java_erudio.exceptions.ResourceNotFoundException;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -14,7 +13,6 @@ import static spring_boot_and_java_erudio.mapper.ObjectMapper.parseListObjects;
 import static spring_boot_and_java_erudio.mapper.ObjectMapper.parseObject;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-import spring_boot_and_java_erudio.mapper.custom.PersonMapper;
 import spring_boot_and_java_erudio.model.Person;
 import spring_boot_and_java_erudio.repository.PersonRepository;
 
@@ -33,8 +31,6 @@ public class PersonServices {
         this.repository = repository;
     }
 
-    @Autowired
-    private PersonMapper converter;
 
 
     public List<PersonDTO> findAll(){
@@ -60,6 +56,9 @@ public class PersonServices {
 
 
     public PersonDTO create(PersonDTO person){
+
+        if (person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Creating one Person!");
 
         Person entity = parseObject(person, Person.class);
@@ -71,6 +70,9 @@ public class PersonServices {
     }
 
     public PersonDTO update(PersonDTO person){
+
+        if (person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Updating one Person!");
 
         Person entity = repository.findById(person.getId())
@@ -94,14 +96,6 @@ public class PersonServices {
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
 
         repository.delete(entity);
-    }
-
-    public PersonDTOV2 createV2(PersonDTOV2 person){
-        logger.info("Creating one Person V2!");
-
-        Person entity = converter.convertDTOToEntity(person);
-
-        return converter.convertEntityToDTO(repository.save(entity));
     }
 
     private void addHateoasLinks(PersonDTO dto) {
