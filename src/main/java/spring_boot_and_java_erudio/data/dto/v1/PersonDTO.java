@@ -1,17 +1,30 @@
 package spring_boot_and_java_erudio.data.dto.v1;
 
+//import com.fasterxml.jackson.annotation.JsonProperty;
+//import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+//import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import spring_boot_and_java_erudio.serializer.GenderSerializer;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-
+//@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
 public class PersonDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+//    @JsonProperty("first_name")
     private String firstName;
+
+//    @JsonProperty("last_name")
     private String lastName;
     private String address;
+
+    @JsonSerialize(using = GenderSerializer.class)
     private String gender;
 
     public PersonDTO() {
@@ -59,8 +72,9 @@ public class PersonDTO implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof PersonDTO person)) return false;
-        return Objects.equals(getId(), person.getId()) && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getGender(), person.getGender());
+        if (object == null || getClass() != object.getClass()) return false;
+        PersonDTO personDTO = (PersonDTO) object;
+        return Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender());
     }
 
     @Override
