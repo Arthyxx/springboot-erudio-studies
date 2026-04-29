@@ -9,7 +9,7 @@ import spring_boot_and_java_erudio.services.PersonServices;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 
     private final PersonServices service;
@@ -18,21 +18,21 @@ public class PersonController {
         this.service = service;
     }
 
-    @GetMapping(value = "/v1/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
                                                 MediaType.APPLICATION_XML_VALUE,
                                                 MediaType.APPLICATION_YAML_VALUE})
     public PersonDTO findById(@PathVariable("id") Long id){
         return service.findById(id);
     }
 
-    @GetMapping(value = "/v1", produces = {MediaType.APPLICATION_JSON_VALUE,
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
                                            MediaType.APPLICATION_XML_VALUE,
                                            MediaType.APPLICATION_YAML_VALUE})
     public List<PersonDTO> findAll(){
         return service.findAll();
     }
 
-    @PostMapping(value = "/v1", consumes = {MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
                                             MediaType.APPLICATION_XML_VALUE,
                                             MediaType.APPLICATION_YAML_VALUE},
                                 produces = {MediaType.APPLICATION_JSON_VALUE,
@@ -42,7 +42,7 @@ public class PersonController {
         return service.create(person);
     }
 
-    @PutMapping(value = "/v1", consumes = {MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
                                            MediaType.APPLICATION_XML_VALUE,
                                            MediaType.APPLICATION_YAML_VALUE},
                                produces = {MediaType.APPLICATION_JSON_VALUE,
@@ -52,7 +52,7 @@ public class PersonController {
         return service.update(person);
     }
 
-    @DeleteMapping("/v1/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
 
