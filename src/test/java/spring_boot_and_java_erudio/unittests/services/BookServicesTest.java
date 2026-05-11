@@ -1,4 +1,4 @@
-package spring_boot_and_java_erudio.services;
+package spring_boot_and_java_erudio.unittests.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,14 +7,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import spring_boot_and_java_erudio.data.dto.v1.BookDTO;
-import spring_boot_and_java_erudio.data.dto.v1.PersonDTO;
 import spring_boot_and_java_erudio.exceptions.RequiredObjectIsNullException;
 import spring_boot_and_java_erudio.model.Book;
-import spring_boot_and_java_erudio.model.Person;
 import spring_boot_and_java_erudio.repository.BookRepository;
-import spring_boot_and_java_erudio.repository.PersonRepository;
-import spring_boot_and_java_erudio.unitetests.mapper.mocks.MockBook;
-import spring_boot_and_java_erudio.unitetests.mapper.mocks.MockPerson;
+import spring_boot_and_java_erudio.services.BookService;
+import spring_boot_and_java_erudio.unittests.mapper.mocks.MockBook;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

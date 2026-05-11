@@ -1,4 +1,4 @@
-package spring_boot_and_java_erudio.unitetests.mapper;
+package spring_boot_and_java_erudio.unittests.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spring_boot_and_java_erudio.mapper.ObjectMapper.parseListObjects;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spring_boot_and_java_erudio.data.dto.v1.PersonDTO;
 import spring_boot_and_java_erudio.model.Person;
-import spring_boot_and_java_erudio.unitetests.mapper.mocks.MockPerson;
+import spring_boot_and_java_erudio.unittests.mapper.mocks.MockPerson;
 
 
 public class ObjectMapperTests {

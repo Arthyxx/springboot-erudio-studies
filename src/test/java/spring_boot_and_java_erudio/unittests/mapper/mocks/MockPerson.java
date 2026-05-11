@@ -1,4 +1,4 @@
-package spring_boot_and_java_erudio.unitetests.mapper.mocks;
+package spring_boot_and_java_erudio.unittests.mapper.mocks;
 
 import spring_boot_and_java_erudio.data.dto.v1.PersonDTO;
 import spring_boot_and_java_erudio.model.Person;
