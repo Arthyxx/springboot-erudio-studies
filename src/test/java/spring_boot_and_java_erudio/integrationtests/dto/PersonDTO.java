@@ -17,8 +17,17 @@ public class PersonDTO implements Serializable {
 
     @JsonSerialize(using = GenderSerializer.class)
     private String gender;
+    private Boolean enabled;
 
     public PersonDTO() {
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -65,11 +74,11 @@ public class PersonDTO implements Serializable {
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
         PersonDTO personDTO = (PersonDTO) object;
-        return Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender());
+        return Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender()) && Objects.equals(getEnabled(), personDTO.getEnabled());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender(), getEnabled());
     }
 }

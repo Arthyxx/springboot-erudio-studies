@@ -26,7 +26,18 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 6)
     private String gender;
 
+    @Column(nullable = false)
+    private Boolean enabled;
+
     public Person() {
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -71,12 +82,13 @@ public class Person implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Person person)) return false;
-        return Objects.equals(getId(), person.getId()) && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getGender(), person.getGender());
+        if (object == null || getClass() != object.getClass()) return false;
+        Person person = (Person) object;
+        return Objects.equals(getId(), person.getId()) && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getGender(), person.getGender()) && Objects.equals(getEnabled(), person.getEnabled());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender(), getEnabled());
     }
 }

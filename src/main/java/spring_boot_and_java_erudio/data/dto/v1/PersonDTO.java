@@ -28,7 +28,17 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     @JsonSerialize(using = GenderSerializer.class)
     private String gender;
 
+    private Boolean enabled;
+
     public PersonDTO() {
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -74,12 +84,13 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     @Override
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
-        PersonDTO personDTO = (PersonDTO) object;
-        return Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender());
+        if (!super.equals(object)) return false;
+        PersonDTO dto = (PersonDTO) object;
+        return Objects.equals(getId(), dto.getId()) && Objects.equals(getFirstName(), dto.getFirstName()) && Objects.equals(getLastName(), dto.getLastName()) && Objects.equals(getAddress(), dto.getAddress()) && Objects.equals(getGender(), dto.getGender()) && Objects.equals(getEnabled(), dto.getEnabled());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender());
+        return Objects.hash(super.hashCode(), getId(), getFirstName(), getLastName(), getAddress(), getGender(), getEnabled());
     }
 }
