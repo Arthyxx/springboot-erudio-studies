@@ -6,4 +6,5 @@ public interface TestConfigs {
     String HEADER_PARAM_AUTHORIZATION = "Authorization";
     String HEADER_PARAM_ORIGIN = "Origin";
 
+    String ORIGIN_ERUDIO = "https://www.erudio.com.br";
 }
