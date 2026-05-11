@@ -6,7 +6,7 @@ import spring_boot_and_java_erudio.config.TestConfigs;
 import spring_boot_and_java_erudio.integrationtests.testcontainers.AbstractIntegrationTest;
 
 import static io.restassured.RestAssured.given;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class SwaggerIntegrationTest extends AbstractIntegrationTest {
