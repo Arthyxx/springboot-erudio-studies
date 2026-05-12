@@ -3,6 +3,8 @@ package spring_boot_and_java_erudio.services;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import spring_boot_and_java_erudio.controllers.PersonController;
 import spring_boot_and_java_erudio.data.dto.v1.PersonDTO;
@@ -34,12 +36,18 @@ public class PersonServices {
 
 
 
-    public List<PersonDTO> findAll(){
+    public Page<PersonDTO> findAll(Pageable pageable){
         logger.info("Finding all People!");
 
-        List<PersonDTO> personDTOS = parseListObjects(repository.findAll(), PersonDTO.class);
-        personDTOS.forEach(p -> addHateoasLinks(p));
-        return personDTOS;
+        Page<Person> people = repository.findAll(pageable);
+
+        Page<PersonDTO> peopleWithLinks = people.map(person -> {
+            PersonDTO dto = parseObject(person, PersonDTO.class);
+            addHateoasLinks(dto);
+            return dto;
+        });
+
+        return peopleWithLinks;
     }
 
 
@@ -118,7 +126,7 @@ public class PersonServices {
 
     private void addHateoasLinks(PersonDTO dto) {
         dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET"));
-        dto.add(linkTo(methodOn(PersonController.class).findAll()).withRel("findAll").withType("GET"));
+        dto.add(linkTo(methodOn(PersonController.class).findAll(1, 12)).withRel("findAll").withType("GET"));
         dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("create").withType("POST"));
         dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update").withType("PUT"));
         dto.add(linkTo(methodOn(PersonController.class).disablePerson(dto.getId())).withRel("disable").withType("PATCH"));
