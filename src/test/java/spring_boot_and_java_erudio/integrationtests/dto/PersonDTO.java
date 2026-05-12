@@ -1,11 +1,13 @@
 package spring_boot_and_java_erudio.integrationtests.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import spring_boot_and_java_erudio.serializer.GenderSerializer;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@XmlRootElement
 public class PersonDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

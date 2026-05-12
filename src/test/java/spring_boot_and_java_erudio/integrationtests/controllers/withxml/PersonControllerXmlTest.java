@@ -1,8 +1,9 @@
-package spring_boot_and_java_erudio.integrationtests.controllers.withjson;
+package spring_boot_and_java_erudio.integrationtests.controllers.withxml;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -20,15 +21,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PersonControllerJsonTest extends AbstractIntegrationTest {
+class PersonControllerXmlTest extends AbstractIntegrationTest {
 
     private static RequestSpecification specification;
-    private static ObjectMapper objectMapper;
+    private static XmlMapper objectMapper;
     private static PersonDTO person;
 
     @BeforeEach
     void setUp() {
-        objectMapper = new ObjectMapper();
+        objectMapper = new XmlMapper();
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
     }
@@ -47,7 +48,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                 .build();
 
         String content = given(specification)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_XML_VALUE)
+                .accept(MediaType.APPLICATION_XML_VALUE)
                 .body(person)
                 .when()
                 .post()
@@ -98,7 +100,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                 .build();
 
         String content = given(specification)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_XML_VALUE)
+                .accept(MediaType.APPLICATION_XML_VALUE)
                 .when()
                 .get("/{id}", person.getId())
                 .then()
@@ -138,7 +141,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                 .build();
 
         String content = given(specification)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_XML_VALUE)
+                .accept(MediaType.APPLICATION_XML_VALUE)
                 .body(person)
                 .when()
                 .put()
@@ -179,7 +183,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                 .build();
 
         given(specification)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_XML_VALUE)
+                .accept(MediaType.APPLICATION_XML_VALUE)
                 .when()
                 .delete("/{id}", person.getId())
                 .then()
@@ -201,7 +206,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                 .build();
 
         given(specification)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_XML_VALUE)
+                .accept(MediaType.APPLICATION_XML_VALUE)
                 .when()
                 .get()
                 .then()
@@ -215,7 +221,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
     @Order(4)
     void disableTest() throws JsonProcessingException{
         String content = given(specification)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .contentType(MediaType.APPLICATION_XML_VALUE)
+                .accept(MediaType.APPLICATION_XML_VALUE)
                     .pathParam("id", person.getId())
                 .when()
                     .patch("{id}")
